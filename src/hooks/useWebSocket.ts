@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+
+// Socket.io-clientをrequire形式でimport
+const io = require('socket.io-client');
 
 export const useWebSocket = () => {
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [socket, setSocket] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export const useWebSocket = () => {
     });
 
     // コントローラー入力更新を受信
-    socketIO.on('gamepad-update', (data) => {
+    socketIO.on('gamepad-update', (data: any) => {
       console.log('🎮 Gamepad Update:', data);
     });
 
